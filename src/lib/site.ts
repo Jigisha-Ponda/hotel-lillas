@@ -4,7 +4,7 @@
 export const site = {
   name: "Hotel Lilla's",
   shortName: "Lilla's",
-  legalName: "Hotel Lilla's by Millora",
+  legalName: "Hotel Lilla's",
   tagline: "A Boutique Stay by the Arabian Sea",
   city: "Dwarka",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://hotellillas.com",
