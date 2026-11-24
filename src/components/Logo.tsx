@@ -28,11 +28,14 @@ export function Monogram({ className = "", draw = false }: { className?: string;
       <path d={oct(0)} fill="none" stroke="url(#hl-gold)" strokeWidth="0.9" pathLength={1} className={draw ? "logo-draw" : ""} />
       <path d={oct(4)} fill="none" stroke="url(#hl-gold)" strokeWidth="0.9" pathLength={1} className={draw ? "logo-draw logo-draw-2" : ""} />
       {/* Interlocked H + L, drawn in a 900×900 grid traced from the logo artwork. */}
-      <g transform="translate(50 50) scale(0.1157) translate(-450 -450)" fill="url(#hl-gold-letters)" className={draw ? "logo-letters" : ""}>
-        <path d={stem(300, 345, 270, 615, 50, 45)} />
-        <path d={stem(545, 590, 270, 615, 40, 55)} />
-        <rect x="343" y="418" width="204" height="30" />
-        <path d="M375,197 H520 V209 Q470,209 470,231 V655 Q470,677 494,677 H640 Q674,668 688,598 H697 L691,695 H375 V683 Q420,683 420,661 V231 Q420,209 375,209 Z" />
+      {/* The animation class sits on an outer group: a CSS `transform` would otherwise replace the scaling attribute below. */}
+      <g className={draw ? "logo-letters" : ""}>
+        <g transform="translate(50 50) scale(0.1157) translate(-450 -450)" fill="url(#hl-gold-letters)">
+          <path d={stem(300, 345, 270, 615, 50, 45)} />
+          <path d={stem(545, 590, 270, 615, 40, 55)} />
+          <rect x="343" y="418" width="204" height="30" />
+          <path d="M375,197 H520 V209 Q470,209 470,231 V655 Q470,677 494,677 H640 Q674,668 688,598 H697 L691,695 H375 V683 Q420,683 420,661 V231 Q420,209 375,209 Z" />
+        </g>
       </g>
     </svg>
   );
