@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@theme {
+  --color-emerald-950: #071c15;
+  --color-forest: #0c2e23;
+  --color-forest-700: #12402f;
+  --color-forest-600: #1a5240;
+  --color-gold: #c8a96a;
+  --color-gold-light: #e6d3a3;
+  --color-gold-dark: #9c7f45;
+  --color-cream: #f7f2e8;
+  --color-sand: #ede4d3;
+  --color-ink: #1c1c19;
+
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Jost Variable", "Jost", system-ui, sans-serif;
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-forest);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-16;
+  }
+  .eyebrow {
+    @apply font-sans text-[11px] font-medium uppercase tracking-[0.42em] text-gold-dark;
+  }
+  .heading-xl {
+    @apply font-display text-[clamp(2.8rem,7vw,6.5rem)] leading-[0.95] font-light tracking-[-0.01em];
+  }
+  .heading-lg {
+    @apply font-display text-[clamp(2.2rem,4.6vw,4.2rem)] leading-[1.02] font-light;
+  }
+  .heading-md {
+    @apply font-display text-[clamp(1.6rem,2.6vw,2.4rem)] leading-[1.1] font-normal;
+  }
+  .body-lg {
+    @apply text-[17px] leading-[1.85] font-light text-ink/75;
+  }
+  .gold-text {
+    background: linear-gradient(100deg, #9c7f45 0%, #e6d3a3 35%, #c8a96a 55%, #f3e6c2 75%, #9c7f45 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Logo draw-on animation (preloader) */
+.logo-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.logo-draw-2 {
+  animation-delay: 0.25s;
+}
+.logo-letters {
+  opacity: 0;
+  animation: letters 1s 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes letters {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
